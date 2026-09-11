@@ -1,20 +1,24 @@
-// path: src/app/services/page.tsx
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SERVICE_PILLARS, CAPABILITIES } from '@/data/services';
 import { MarginNote } from '@/components/brand/MarginNote';
 import { DimensionLine } from '@/components/brand/DimensionLine';
+import {
+  SystemArchitectSimulator,
+  ServiceComparison,
+  ArchitecturalAudit,
+} from '@/components/sections';
 
 export const metadata: Metadata = {
-  title: 'Engineering Services  Apache Spark',
+  title: 'Engineering Services & Architecture Pods — Apache Spark',
   description:
     'Software, systems, networks, and infrastructure drafted to spec and deployed end to end. One engineering team from the wiring closet to the deployment pipeline.',
 };
 
 export default function ServicesPage() {
   return (
-    <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 md:px-8 flex flex-col gap-16 select-none min-h-screen">
+    <div className="pt-32 pb-24 max-w-7xl mx-auto px-4 md:px-8 flex flex-col gap-20 select-none min-h-screen">
       {/* Margin annotations */}
       <div className="flex items-center justify-between w-full border-b border-[rgba(20,24,28,0.16)] pb-3">
         <MarginNote>DISCIPLINES // 04 PILLARS</MarginNote>
@@ -23,8 +27,8 @@ export default function ServicesPage() {
 
       {/* Header */}
       <div className="max-w-3xl flex flex-col gap-4">
-        <span className="font-mono text-[11px] text-[#9E5430] tracking-[0.24em] uppercase">
-          // CAPABILITY PORTFOLIO
+        <span className="font-mono text-[11px] text-[#9E5430] tracking-[0.24em] uppercase font-semibold">
+          // CAPABILITY PORTFOLIO &amp; ARCHITECTURE PODS
         </span>
         <h1 className="font-sans text-[clamp(34px,6vw,72px)] font-bold text-[#14181C] tracking-[-0.02em] leading-[1.02]">
           Engineering Services
@@ -40,7 +44,7 @@ export default function ServicesPage() {
           <div
             key={pillar.title}
             id={pillar.title.toLowerCase()}
-            className="border border-[rgba(20,24,28,0.16)] bg-[#F2EFE8] p-8 md:p-12 flex flex-col gap-8"
+            className="border border-[rgba(20,24,28,0.16)] bg-[#F2EFE8] p-8 md:p-12 flex flex-col gap-8 shadow-sm"
           >
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-6 border-b border-[rgba(20,24,28,0.12)]">
               <div className="flex items-baseline gap-4">
@@ -90,20 +94,29 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[rgba(20,24,28,0.10)] flex items-center justify-between">
+            <div className="pt-6 border-t border-[rgba(20,24,28,0.10)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <Link
-                href="/contact"
-                className="btn-spark solid text-[11px] py-2.5 px-6"
+                href={`/contact?service=${encodeURIComponent(pillar.title)}`}
+                className="btn-spark solid text-[11px] py-2.5 px-6 self-start sm:self-auto"
               >
-                DISCUSS A {pillar.title.toUpperCase()} SPRINT
+                DISCUSS A {pillar.title.toUpperCase()} SPRINT →
               </Link>
               <span className="font-mono text-[10px] text-[#7C7568] tracking-[0.18em]">
-                CERTIFIED STANDARDS COMPLIANT
+                CERTIFIED STANDARDS COMPLIANT // SENIOR ARCHITECT LED
               </span>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Interactive System Architect Simulator */}
+      <SystemArchitectSimulator />
+
+      {/* Market Comparison Matrix */}
+      <ServiceComparison />
+
+      {/* 60-Second Architectural Audit Lead Generator */}
+      <ArchitecturalAudit />
 
       {/* Capabilities Matrix */}
       <div className="flex flex-col gap-6 pt-8">

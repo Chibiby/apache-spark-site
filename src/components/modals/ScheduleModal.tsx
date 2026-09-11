@@ -6,9 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Clock, Check, Shield, ArrowRight } from 'lucide-react';
 import { BEZIER } from '@/lib/animations';
 
+import { ScheduleModalDetail } from '@/lib/events';
+
 interface ScheduleModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialDetail?: ScheduleModalDetail;
 }
 
 const TIME_SLOTS = [
@@ -18,7 +21,7 @@ const TIME_SLOTS = [
   'Thursday, 11:00 AM – 11:20 AM PST',
 ];
 
-export const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose }) => {
+export const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose, initialDetail }) => {
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -28,6 +31,16 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({ isOpen, onClose })
     slot: TIME_SLOTS[1],
     notes: '',
   });
+
+  useEffect(() => {
+    if (isOpen && initialDetail) {
+      setFormData((prev) => ({
+        ...prev,
+        interest: initialDetail.interest || prev.interest,
+        notes: initialDetail.notes || prev.notes,
+      }));
+    }
+  }, [isOpen, initialDetail]);
 
   // Handle escape key
   useEffect(() => {

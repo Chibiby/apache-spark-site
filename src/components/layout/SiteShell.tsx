@@ -23,9 +23,14 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
   const pathname = usePathname();
   const [isIframe, setIsIframe] = useState<boolean>(false);
   const [scheduleOpen, setScheduleOpen] = useState<boolean>(false);
+  const [scheduleDetail, setScheduleDetail] = useState<{ interest?: string; notes?: string } | undefined>(undefined);
 
   useEffect(() => {
-    const handleOpen = () => setScheduleOpen(true);
+    const handleOpen = (e: Event) => {
+      const customEvent = e as CustomEvent<{ interest?: string; notes?: string }>;
+      setScheduleDetail(customEvent.detail);
+      setScheduleOpen(true);
+    };
     window.addEventListener('spark:open-schedule', handleOpen);
     return () => window.removeEventListener('spark:open-schedule', handleOpen);
   }, []);
@@ -86,7 +91,11 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
       <QuickEngageDock onOpenSchedule={() => setScheduleOpen(true)} />
 
       {/* Global Architectural Discovery Call Modal */}
-      <ScheduleModal isOpen={scheduleOpen} onClose={() => setScheduleOpen(false)} />
+      <ScheduleModal
+        isOpen={scheduleOpen}
+        onClose={() => setScheduleOpen(false)}
+        initialDetail={scheduleDetail}
+      />
     </>
   );
 };

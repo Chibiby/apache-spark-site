@@ -280,13 +280,24 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               <h3 className="font-sans text-[24px] md:text-[28px] font-bold text-[#F2EFE8]">
                 Need similar systems built to spec?
               </h3>
+              <p className="font-mono text-[12px] text-[#C0B9AA]">
+                Our Principal Engineers build and deploy production-grade software and physical architectures on deterministic fixed-price sprints.
+              </p>
             </div>
-            <Link
-              href="/contact"
-              className="btn-spark solid text-[11px] py-3.5 px-6 whitespace-nowrap"
-            >
-              COMMISSION SPRINT
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+              <Link
+                href={`/contact?service=${encodeURIComponent(project.discipline)}&notes=${encodeURIComponent(`Inquiry regarding replication or modernizing systems similar to ${project.sheetNo}: ${project.title}`)}`}
+                className="btn-spark solid text-[11px] py-3.5 px-6 whitespace-nowrap"
+              >
+                COMMISSION SPRINT →
+              </Link>
+              <Link
+                href="/#scope-calculator"
+                className="inline-flex items-center justify-center font-mono text-[11px] tracking-[0.16em] uppercase px-4 py-3.5 border border-[#F2EFE8]/20 text-[#F2EFE8] hover:bg-[#F2EFE8] hover:text-[#14181C] transition-colors whitespace-nowrap"
+              >
+                ESTIMATE SCOPE
+              </Link>
+            </div>
           </div>
         </div>
       </div>

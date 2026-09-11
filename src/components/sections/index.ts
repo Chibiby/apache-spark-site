@@ -17,4 +17,7 @@ export * from './Team';
 export * from './ApplyDevModal';
 export * from './FAQ';
 export * from './CTASheet';
-
+export * from './SystemArchitectSimulator';
+export * from './ArchitecturalAudit';
+export * from './ServiceComparison';
+export * from './EnterpriseTrustBadges';

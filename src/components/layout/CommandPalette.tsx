@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS } from '@/data/projects';
 import { BRAND_COPY } from '@/lib/constants';
+import { openScheduleModal } from '@/lib/events';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { Search, CornerDownLeft, Copy, Check } from 'lucide-react';
 
@@ -25,7 +26,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
   // Section jump targets
   const sections = [
     { label: 'HOME / HERO', href: '/#hero', type: 'SECTION' },
+    { label: 'CALCULATE SPRINT SCOPE & COST', href: '/#scope-calculator', type: 'ACTION' },
+    { label: 'LAUNCH SPARK TERMINAL (ASCII BENCHMARK)', href: '/#terminal', type: 'ACTION' },
     { label: 'SERVICES / PILLARS', href: '/services', type: 'SECTION' },
+    { label: 'SYSTEM ARCHITECTURE SIMULATOR', href: '/services#simulator', type: 'SECTION' },
+    { label: '60-SECOND ARCHITECTURAL READINESS AUDIT', href: '/services#audit', type: 'SECTION' },
+    { label: 'SERVICE COMPARISON MATRIX (VS AGENCIES)', href: '/services#comparison-matrix', type: 'SECTION' },
     { label: 'CAPABILITIES BENTO', href: '/#capabilities', type: 'SECTION' },
     { label: 'NETWORK TOPOLOGY DIAGRAM', href: '/#network-diagram', type: 'SECTION' },
     { label: 'PERFORMANCE METRICS', href: '/#metrics', type: 'SECTION' },
@@ -39,19 +45,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     { label: 'ENGINEERING TEAM', href: '/about#team', type: 'SECTION' },
     { label: 'TECHNICAL FAQ', href: '/#faq', type: 'SECTION' },
     { label: 'CONTACT & SPECIFICATIONS', href: '/contact', type: 'SECTION' },
+    { label: 'READ LLMS.TXT (AI ARCHITECT SUMMARY)', href: '/llms.txt', type: 'EXTERNAL' },
   ];
 
   // Project sheets
   const projectItems = PROJECTS.map((p) => ({
-    label: `${p.sheetNo}  ${p.title} (${p.client})`,
+    label: `${p.sheetNo} — ${p.title} (${p.client})`,
     href: `/projects/${p.slug}`,
     type: 'SHEET',
   }));
 
   const allItems = [
+    { label: '⚡ BOOK 20-MIN ARCHITECTURAL DISCOVERY CALL', href: 'book-discovery', type: 'ACTION' },
+    { label: `COPY CONTACT EMAIL (${BRAND_COPY.contactEmail})`, href: 'copy-email', type: 'ACTION' },
     ...sections,
     ...projectItems,
-    { label: `COPY CONTACT EMAIL (${BRAND_COPY.contactEmail})`, href: 'copy-email', type: 'ACTION' },
   ];
 
   const filtered = allItems.filter((item) =>
@@ -96,6 +104,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         setCopied(false);
         onClose();
       }, 900);
+      return;
+    }
+
+    if (item.href === 'book-discovery') {
+      onClose();
+      openScheduleModal({ interest: 'Command Palette Quick Action' });
       return;
     }
 

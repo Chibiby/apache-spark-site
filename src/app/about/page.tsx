@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { TEAM_MEMBERS } from '@/data/team';
 import { MarginNote } from '@/components/brand/MarginNote';
 import { DimensionLine } from '@/components/brand/DimensionLine';
+import { EnterpriseTrustBadges } from '@/components/sections';
 
 export const metadata: Metadata = {
   title: 'About the Firm  Apache Spark',
@@ -142,22 +143,30 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Enterprise Security & Governance Badges */}
+      <EnterpriseTrustBadges />
+
       {/* Bottom CTA */}
       <div className="p-8 md:p-12 border border-[rgba(20,24,28,0.16)] bg-[#14181C] text-[#F2EFE8] flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex flex-col gap-2">
           <span className="font-mono text-[10px] text-[#C97A4A] tracking-[0.24em] uppercase">
-            // JOIN OUR FIELD SQUAD
+            // COMMISSION AN ARCHITECTURE SPRINT
           </span>
           <h3 className="font-sans text-[22px] md:text-[26px] font-bold text-[#F2EFE8]">
-            We recruit senior physical and systems engineers.
+            Partner with our Senior Principal Engineers.
           </h3>
+          <p className="font-mono text-[12px] text-[#C0B9AA]">
+            Direct architect communication, zero junior delegation, 100% IP transfer upon completion.
+          </p>
         </div>
-        <Link
-          href="/contact"
-          className="btn-spark solid text-[11px] py-3 px-6 whitespace-nowrap"
-        >
-          CONTACT THE LAB
-        </Link>
+        <div className="flex items-center gap-3 shrink-0">
+          <Link
+            href="/contact"
+            className="btn-spark solid text-[11px] py-3 px-6 whitespace-nowrap"
+          >
+            START AN ENGAGEMENT →
+          </Link>
+        </div>
       </div>
 
       <div className="mt-8">
