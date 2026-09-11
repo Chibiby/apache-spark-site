@@ -37,10 +37,24 @@ All subagents operate with **`gemini-3.8-pro`**:
 - **`@database-engineer`**: Forward-only SQL migrations, idempotency, indexes, constraints, RLS policies.
 - **`@debugger`**: Deterministic reproduction, root-cause identification, minimal fixes with regression tests.
 - **`@code-reviewer`**: Adversarial diff audits, correctness verification, regression risk analysis. Read-only.
+- **`@ui-ux-engineer`**: Frontend design systems, responsive layouts, Tailwind tokens, micro-interactions, canvas/Three.js polish, WCAG accessibility.
+- **`@marketing-specialist`**: High-conversion engineering copy, value propositions, ledes, case studies, CTA architecture.
+- **`@seo-engineer`**: JSON-LD structured schemas, OpenGraph metadata, Core Web Vitals, sitemaps, robots.txt, semantic HTML.
+- **`@devops-cloud-engineer`**: Build pipelines, Vercel/edge caching headers, asset budgets, zero-downtime release runbooks.
+- **`@security-auditor`**: Adversarial vulnerability audit, secrets scanning, injection flaw detection, dependency CVE checks. Read-only.
 
 ---
 
-## 3. General Workspace Guidelines
+## 3. Dynamic On-The-Fly Agent Synthesis
+
+When the Tech Lead determines that a task requires a specialized domain not covered by the standard roster (e.g. `@cryptography-specialist`, `@compliance-officer`, `@data-pipeline-engineer`, `@i18n-specialist`):
+1. **Synthesize on Demand**: Run `node .agents/plugins/tech-lead/skills/tech-lead/scripts/create-agent.mjs --name <agent-name> --description "<description>"`.
+2. **Permanent Persistence**: The synthesized agent is saved to `.agents/plugins/tech-lead/agents/<agent-name>.md` with Gemini 3.8 Pro frontmatter and tools.
+3. **Immediate & Future Orchestration**: The newly created agent is immediately dispatched for the current task and retained permanently in the roster for all future tasks.
+
+---
+
+## 4. General Workspace Guidelines
 
 - **Architecture Integrity**: Extend existing patterns rather than introducing ad-hoc alternatives.
 - **Verification First**: Never claim a check passed without inspecting command execution codes.

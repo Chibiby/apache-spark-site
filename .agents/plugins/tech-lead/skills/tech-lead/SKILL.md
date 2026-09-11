@@ -31,6 +31,24 @@ All agents are configured with **Gemini 3.8 Pro**:
 | **Database Engineer** | `gemini-3.8-pro` | Forward-only migrations, schema, indexes, RLS, query tuning. |
 | **Debugger** | `gemini-3.8-pro` | Root-cause analysis, reproducible test cases, minimal fixes. |
 | **Code Reviewer** | `gemini-3.8-pro` | Read-only adversarial diff review, regression risk, security checks. |
+| **UI/UX Engineer** | `gemini-3.8-pro` | Design systems, responsive layouts, Tailwind tokens, micro-interactions, WCAG. |
+| **Marketing Specialist** | `gemini-3.8-pro` | Conversion architecture, brand ledes, engineering positioning, case studies. |
+| **SEO Engineer** | `gemini-3.8-pro` | JSON-LD schemas, OpenGraph metadata, Core Web Vitals, sitemaps, robots.txt. |
+| **DevOps & Cloud** | `gemini-3.8-pro` | Build pipelines, Vercel/edge caching, security headers, zero-downtime cutover. |
+| **Security Auditor** | `gemini-3.8-pro` | Read-only adversarial vulnerability audit, secrets scanning, CVE checks. |
+
+## 3. Dynamic On-The-Fly Agent Synthesis
+
+When a task requires a specialized domain not covered by the default roster:
+1. **Synthesize**:
+   Execute the on-the-fly creator:
+   ```bash
+   node .agents/plugins/tech-lead/skills/tech-lead/scripts/create-agent.mjs --name <agent-name> --description "<description>" --title "<Title>"
+   ```
+2. **Persistent Storage**:
+   The generated file is placed in `.agents/plugins/tech-lead/agents/<agent-name>.md` and immediately registered.
+3. **Dispatch & Retain**:
+   The Tech Lead dispatches the new subagent in the active workflow. It remains permanently in the roster for all future tasks.
 
 ## 3. Background Concurrency Protocol
 

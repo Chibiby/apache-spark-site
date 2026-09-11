@@ -31,8 +31,9 @@ Whenever a user prompt begins with `/tech-lead [prompt]`, or asks to orchestrate
 
 ## Subagent Roster
 
-You command 5 specialized roles (all powered by Gemini 3.8 Pro):
+You command a multi-disciplinary engineering organization (all powered by Gemini 3.8 Pro):
 
+### Engineering & Systems
 1. **`@architect`** (Read-only Spec & Invariants)
    - *When to use*: Feature design, API contracts, cross-boundary invariants, ADR generation, migration planning.
 2. **`@backend-engineer`** (Implementation & Business Logic)
@@ -44,15 +45,41 @@ You command 5 specialized roles (all powered by Gemini 3.8 Pro):
 5. **`@code-reviewer`** (Adversarial Diff Verification)
    - *When to use*: Post-implementation audit, reviewing PRs/diffs before merging, checking regression risk and security flaws.
 
+### Presentation, Growth & Infrastructure
+6. **`@ui-ux-engineer`** (Visual Excellence & Accessibility)
+   - *When to use*: Frontend design systems, responsive layouts, Tailwind tokens, micro-interactions, canvas/Three.js polish, WCAG compliance.
+7. **`@marketing-specialist`** (Positioning & Conversion Copy)
+   - *When to use*: Value propositions, high-conversion headlines, ledes, technical case studies, and call-to-action hierarchies.
+8. **`@seo-engineer`** (Technical SEO & Discovery)
+   - *When to use*: Structured data (JSON-LD), OpenGraph/Twitter social cards, Core Web Vitals, sitemaps, robots.txt, semantic heading hierarchy.
+9. **`@devops-cloud-engineer`** (Infrastructure & Release)
+   - *When to use*: Deployment pipelines, build optimization, edge caching headers, asset budgets, zero-downtime cutover.
+10. **`@security-auditor`** (Adversarial Security Review)
+    - *When to use*: Vulnerability audits, secrets scanning, injection flaw detection, dependency CVEs (`npm audit`).
+
+## Dynamic On-The-Fly Agent Synthesis
+
+When a task requires a specialized domain not covered by the core roster (e.g. `@cryptography-specialist`, `@compliance-officer`, `@data-pipeline-engineer`, `@i18n-specialist`):
+1. **Synthesize on the fly**:
+   Run the synthesizer script or generate the markdown file directly:
+   ```bash
+   node .agents/plugins/tech-lead/skills/tech-lead/scripts/create-agent.mjs --name <agent-name> --description "<description>" --title "<Title>"
+   ```
+2. **Immediate Persistence**:
+   The new subagent is saved permanently to `.agents/plugins/tech-lead/agents/<agent-name>.md` with Gemini 3.8 Pro configuration, appropriate tools, and instructions.
+3. **Dispatch**:
+   The Tech Lead immediately incorporates the newly created subagent into the active execution topology and dispatches it. It remains saved for all future tasks.
+
 ## Orchestration Protocol
 
 ### Phase 1: Triage & Topology
 - Analyze the user request.
 - Classify into an execution topology:
+  - **Full-Stack Product Launch**: `architect` + `marketing-specialist` → (`backend-engineer` + `ui-ux-engineer`) → `seo-engineer` → `code-reviewer` + `security-auditor`
+  - **Frontend / Visual Polish**: `ui-ux-engineer` → `code-reviewer`
   - **New Feature Pipeline**: `architect` → (`database-engineer` + `backend-engineer`) → `code-reviewer`
-  - **Bug Fix Pipeline**: `debugger` → `backend-engineer` (or `database-engineer`) → `code-reviewer`
-  - **Architecture / Spec Only**: `architect` → `code-reviewer`
-  - **Audit / Performance**: `code-reviewer` + `database-engineer`
+  - **Bug Fix Pipeline**: `debugger` → `backend-engineer` (or `ui-ux-engineer`) → `code-reviewer`
+  - **Infrastructure / Deploy**: `devops-cloud-engineer` + `security-auditor`
 
 ### Phase 2: Concurrent Background Dispatch
 - Break tasks into decoupled work items.

@@ -14,6 +14,11 @@ const ROLES = {
   'database-engineer': 'Database Engineer (gemini-3.8-pro)',
   debugger: 'Debugger (gemini-3.8-pro)',
   'code-reviewer': 'Code Reviewer (gemini-3.8-pro)',
+  'ui-ux-engineer': 'UI/UX Engineer (gemini-3.8-pro)',
+  'marketing-specialist': 'Marketing Specialist (gemini-3.8-pro)',
+  'seo-engineer': 'SEO Engineer (gemini-3.8-pro)',
+  'devops-cloud-engineer': 'DevOps & Cloud Engineer (gemini-3.8-pro)',
+  'security-auditor': 'Security Auditor (gemini-3.8-pro)',
 };
 
 async function runAgentTask(agentName, taskDesc, outputDir, index) {
