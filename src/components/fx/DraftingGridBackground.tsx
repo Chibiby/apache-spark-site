@@ -79,13 +79,31 @@ export const DraftingGridBackground: React.FC = () => {
       const cols = Math.ceil(width / GRID_SIZE) + 1;
       const rows = Math.ceil(height / GRID_SIZE) + 1;
 
-      // Stable drafting grid points (no jarring magnetic distortion)
+      // Calculate grid points with magnetic pull warping around cursor
       const points: { x: number; y: number }[][] = [];
+      const INFLUENCE_RADIUS = 260;
 
       for (let r = 0; r <= rows; r++) {
         points[r] = [];
         for (let c = 0; c <= cols; c++) {
-          points[r][c] = { x: c * GRID_SIZE, y: r * GRID_SIZE };
+          const originalX = c * GRID_SIZE;
+          const originalY = r * GRID_SIZE;
+
+          const dx = originalX - mouseX;
+          const dy = originalY - mouseY;
+          const dist = Math.hypot(dx, dy);
+
+          let displacedX = originalX;
+          let displacedY = originalY;
+
+          if (dist < INFLUENCE_RADIUS && dist > 0) {
+            // Elastic magnetic pull warping toward mouse
+            const force = Math.pow(1 - dist / INFLUENCE_RADIUS, 2) * 12;
+            displacedX -= (dx / dist) * force;
+            displacedY -= (dy / dist) * force;
+          }
+
+          points[r][c] = { x: displacedX, y: displacedY };
         }
       }
 
