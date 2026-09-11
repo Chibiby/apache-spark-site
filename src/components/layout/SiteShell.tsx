@@ -7,6 +7,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { CustomCursor } from '@/components/fx/CustomCursor';
+import { DraftingGridBackground } from '@/components/fx/DraftingGridBackground';
 import { SmoothScroll } from '@/components/fx/SmoothScroll';
 import { Preloader } from '@/components/brand/Preloader';
 
@@ -54,13 +55,16 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
       {/* Drafting crosshair cursor */}
       <CustomCursor />
 
+      {/* Interactive blueprint drafting grid & caliper guides behind everything */}
+      <DraftingGridBackground />
+
       {/* Lenis on GSAP Ticker */}
       <SmoothScroll>
         {/* Global Header / Navbar */}
         <Navbar />
 
         {/* Main Route Content */}
-        <div className="flex-1 flex flex-col">{children}</div>
+        <div className="flex-1 flex flex-col relative z-10">{children}</div>
 
         {/* Global Inverted Footer */}
         <Footer />

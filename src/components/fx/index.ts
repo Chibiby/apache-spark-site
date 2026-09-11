@@ -10,3 +10,4 @@ export * from './Marquee';
 export * from './ParallaxLayer';
 export * from './PageTransition';
 export * from './ScrollHUD';
+export * from './DraftingGridBackground';

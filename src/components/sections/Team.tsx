@@ -22,19 +22,6 @@ export const Team: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const [cardMousePos, setCardMousePos] = useState<{ [key: number]: { x: number; y: number } }>({});
-
-  const handleCardMouseMove = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setCardMousePos((prev) => ({
-      ...prev,
-      [index]: {
-        x: Math.round(e.clientX - rect.left),
-        y: Math.round(e.clientY - rect.top),
-      },
-    }));
-  };
-
   return (
     <section id="team" className="py-24 max-w-7xl mx-auto px-4 md:px-8">
       {/* Margin annotations */}
@@ -69,14 +56,12 @@ export const Team: React.FC = () => {
         {TEAM_MEMBERS.map((member, i) => {
           const isHiring = member.isHiring;
           const stationLabel = `STATION 0${i + 1}`;
-          const currentPos = cardMousePos[i] || { x: 140, y: 140 };
 
           return (
             <motion.div
               key={member.index}
               onMouseEnter={() => setHoveredIdx(i)}
               onMouseLeave={() => setHoveredIdx(null)}
-              onMouseMove={(e) => handleCardMouseMove(i, e)}
               onClick={() => {
                 if (isHiring) {
                   handleOpenApply(stationLabel, member.role);
@@ -92,28 +77,13 @@ export const Team: React.FC = () => {
                   : 'bg-[#F2EFE8]'
               }`}
             >
-              {/* Dynamic Interactive Mouse Hover Background Spotlight (Clean Visible Light Glow) */}
-              <div
-                className="absolute inset-0 pointer-events-none transition-opacity duration-150 z-0"
-                style={{
-                  opacity: hoveredIdx === i ? 1 : 0,
-                  background: `radial-gradient(320px circle at ${currentPos.x}px ${currentPos.y}px, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 35%, rgba(255, 255, 255, 0.2) 65%, transparent 80%)`,
-                }}
-              />
-
-
               {/* Top row */}
-              <div className="relative z-10 flex items-center justify-between pb-4 border-b border-[rgba(20,24,28,0.10)] font-mono text-[10px] tracking-[0.2em]">
+              <div className="flex items-center justify-between pb-4 border-b border-[rgba(20,24,28,0.10)] font-mono text-[10px] tracking-[0.2em]">
                 <div className="flex items-center gap-2">
                   <span className="text-[#9E5430] font-semibold">{member.index}</span>
                   {member.devNumber && (
                     <span className="bg-[#14181C] text-[#F2EFE8] px-1.5 py-0.5 text-[9px] tracking-[0.14em] font-medium">
                       {member.devNumber}
-                    </span>
-                  )}
-                  {hoveredIdx === i && (
-                    <span className="text-[9px] text-[#7C7568] tracking-widest hidden sm:inline-block">
-                      [X:{currentPos.x} Y:{currentPos.y}]
                     </span>
                   )}
                 </div>
