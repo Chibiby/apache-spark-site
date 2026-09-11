@@ -11,6 +11,9 @@ import { DraftingGridBackground } from '@/components/fx/DraftingGridBackground';
 import { SmoothScroll } from '@/components/fx/SmoothScroll';
 import { Preloader } from '@/components/brand/Preloader';
 
+import { ScheduleModal } from '@/components/modals/ScheduleModal';
+import { QuickEngageDock } from '@/components/layout/QuickEngageDock';
+
 interface SiteShellProps {
   children: React.ReactNode;
   modal?: React.ReactNode;
@@ -19,6 +22,13 @@ interface SiteShellProps {
 export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
   const pathname = usePathname();
   const [isIframe, setIsIframe] = useState<boolean>(false);
+  const [scheduleOpen, setScheduleOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleOpen = () => setScheduleOpen(true);
+    window.addEventListener('spark:open-schedule', handleOpen);
+    return () => window.removeEventListener('spark:open-schedule', handleOpen);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -35,7 +45,6 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
   const isEmbedRoute = pathname?.startsWith('/embed') || isIframe;
 
   // Complete isolation for embed routes and iframes
-  // ZERO Apache Spark headers, footers, crosshair cursors, preloader curtains, or smooth scroll hijacking
   if (isEmbedRoute) {
     return (
       <main className="w-full min-h-screen bg-white font-sans antialiased text-slate-900">
@@ -72,6 +81,13 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
         {/* Intercepting Route Modal Slot */}
         {modal}
       </SmoothScroll>
+
+      {/* Persistent Quick Engage Floating Dock & Mobile Bar */}
+      <QuickEngageDock onOpenSchedule={() => setScheduleOpen(true)} />
+
+      {/* Global Architectural Discovery Call Modal */}
+      <ScheduleModal isOpen={scheduleOpen} onClose={() => setScheduleOpen(false)} />
     </>
   );
 };
+

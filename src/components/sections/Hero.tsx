@@ -10,6 +10,7 @@ import { Crosshair } from '@/components/brand/Crosshair';
 import { DimensionLine } from '@/components/brand/DimensionLine';
 import { BRAND_COPY } from '@/lib/constants';
 import { BEZIER } from '@/lib/animations';
+import { openScheduleModal } from '@/lib/events';
 
 export const Hero: React.FC = () => {
   return (
@@ -56,6 +57,13 @@ export const Hero: React.FC = () => {
           <Link href="/contact" className="btn-spark solid">
             START A PROJECT
           </Link>
+          <button
+            type="button"
+            onClick={openScheduleModal}
+            className="btn-spark border-[#9E5430] text-[#14181C] hover:bg-[#9E5430] hover:text-[#F2EFE8]"
+          >
+            BOOK 20-MIN DISCOVERY
+          </button>
           <Link href="/projects" className="btn-spark">
             OUR WORK
           </Link>

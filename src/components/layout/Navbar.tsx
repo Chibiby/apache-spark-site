@@ -11,6 +11,7 @@ import { MobileDrawer } from './MobileDrawer';
 import { CommandPalette } from './CommandPalette';
 import { cn } from '@/lib/utils';
 import { Search, Menu } from 'lucide-react';
+import { openScheduleModal } from '@/lib/events';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
@@ -98,6 +99,14 @@ export const Navbar: React.FC = () => {
             >
               <Search className="w-3.5 h-3.5 stroke-[1.5]" />
               <span>?K</span>
+            </button>
+
+            {/* Book Discovery Call */}
+            <button
+              onClick={openScheduleModal}
+              className="btn-spark hidden xl:inline-flex text-[11px] py-2.5 px-3.5"
+            >
+              BOOK DISCOVERY
             </button>
 
             {/* Solid CTA */}

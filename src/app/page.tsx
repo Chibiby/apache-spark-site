@@ -1,14 +1,17 @@
 // path: src/app/page.tsx
 import React from 'react';
 import { Hero } from '@/components/sections/Hero';
+import { TrustBar } from '@/components/sections/TrustBar';
 import { Descriptors } from '@/components/sections/Descriptors';
 import { Services } from '@/components/sections/Services';
 import { Capability } from '@/components/sections/Capability';
+import { ScopeEstimator } from '@/components/sections/ScopeEstimator';
 import { NetworkDiagram } from '@/components/sections/NetworkDiagram';
 import { Metrics } from '@/components/sections/Metrics';
 import { ProcessSheet } from '@/components/sections/ProcessSheet';
 import { ProjectsPreview } from '@/components/sections/ProjectsPreview';
 import { LiveShowcase } from '@/components/sections/LiveShowcase';
+import { SparkTerminal } from '@/components/sections/SparkTerminal';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Engagements } from '@/components/sections/Engagements';
 import { Team } from '@/components/sections/Team';
@@ -33,6 +36,9 @@ export default function HomePage() {
       {/* 02 Hero */}
       <Hero />
 
+      {/* 02B Verified Client & System Deployments Trust Bar */}
+      <TrustBar />
+
       {/* 03 Descriptors */}
       <Descriptors />
 
@@ -41,6 +47,9 @@ export default function HomePage() {
 
       {/* 05 Capability Bento */}
       <Capability />
+
+      {/* 05B Interactive Scope & Sprint Pod Estimator */}
+      <ScopeEstimator />
 
       {/* 06 Interactive Network Topology Diagram */}
       <NetworkDiagram />
@@ -56,6 +65,9 @@ export default function HomePage() {
 
       {/* 09B Live Systems Interactive Showcase */}
       <LiveShowcase />
+
+      {/* 09C Live Diagnostic Terminal & Developer Sandbox */}
+      <SparkTerminal />
 
       {/* 10 Testimonials */}
       <Testimonials />

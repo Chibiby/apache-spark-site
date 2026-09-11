@@ -1,0 +1,33 @@
+# Apache Spark — Technical Systems & Software Engineering Company
+> Software, full-stack platforms, and distributed systems, drafted to spec and deployed end to end.
+
+## Overview
+Apache Spark is an elite software engineering and systems architecture firm based in San Francisco and Chicago. We engineer mission-critical applications, distributed cloud services, and low-latency systems for startups, venture-backed companies, and enterprise facilities.
+
+## Principal Engineering Team
+- Brandanlee Hugos: Lead Systems Developer & Co-Founder (Core Architecture, Distributed Consensus & High-Concurrency Systems)
+- Dante Nicolas: Core Systems Engineer & Co-Founder (Low-Latency Pipelines, Network Protocols & Runtime Optimization)
+
+## Core Capabilities
+- Full-Stack Web & SaaS Platforms: Next.js 15 App Router, React 19, TypeScript Strict, Supabase, Postgres RLS, Tailwind CSS.
+- Distributed Systems & High-Throughput APIs: Rust (Tokio), Go, gRPC, Kafka event streaming, sub-20ms p99 response times.
+- Cloud & Infrastructure Mesh: Terraform IaC, Docker, Kubernetes, Zero-Trust Network Access (ZTNA), Vercel Edge caching.
+- Industrial Telemetry & SCADA: Modbus, OPC-UA, industrial real-time Ethernet, cryogenic compute pods, Fluke DSX-8000 certified.
+
+## Key Verified Deployments & Case Studies
+- Project LiTrack (Department of Education): ARAL Diagnostic Reading Telemetry tracking 12,000+ active learner records with <18ms real-time diagnostic evaluation.
+- Vanguard Foundry: SCADA Industrial Ethernet mesh with 99.999% uptime across harsh foundry environments.
+- ASPAJCCJSI Press Portal: Multi-tenant high-velocity journalism publishing CMS with instant edge distribution.
+- Metro Health Telemetry: High-resilience optical fiber telemetry rings for clinical monitoring.
+
+## Commercial Engagements
+- Architectural Draft Sprint (3–5 Weeks): Pre-procurement discovery, risk register & complete engineering schematics.
+- Full Turnkey Implementation (8–12 Weeks / 4–9 Months): Complete delivery from code to deployment pipeline with 100% IP transfer.
+- Retained Escalation Pod: Ongoing architectural advisory and Tier-4 operational backing with 15-minute SLA.
+
+## Inquiries & Direct Engineering Contact
+- Website: https://apachespark.tech
+- Email: engage@apachespark.tech
+- Phone: +1 (555) 488-2890
+- Regional Labs: San Francisco, CA & Chicago, IL
+- Mutual NDA Guaranteed: All specifications and proprietary IP are protected under strict confidentiality.

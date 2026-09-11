@@ -57,18 +57,87 @@ export default function RootLayout({
 }) {
   const jsonLdOrg = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'APACHE SPARK',
-    url: 'https://apachespark.tech',
-    logo: 'https://apachespark.tech/brand/svg/apache-spark-lockup-horizontal-ink.svg',
-    description:
-      'We build the systems your business runs on. Software, networks and infrastructure, drafted to spec and deployed end to end.',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'San Francisco',
-      addressRegion: 'CA',
-      addressCountry: 'US',
-    },
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': 'https://apachespark.tech/#organization',
+        name: 'APACHE SPARK',
+        url: 'https://apachespark.tech',
+        logo: 'https://apachespark.tech/brand/svg/apache-spark-lockup-horizontal-ink.svg',
+        description:
+          'Software, full-stack platforms, and distributed systems, drafted to spec and deployed end to end.',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'San Francisco',
+          addressRegion: 'CA',
+          addressCountry: 'US',
+        },
+        founder: [
+          {
+            '@type': 'Person',
+            name: 'Brandanlee Hugos',
+            jobTitle: 'Lead Systems Developer & Co-Founder',
+          },
+          {
+            '@type': 'Person',
+            name: 'Dante Nicolas',
+            jobTitle: 'Core Systems Developer & Performance Specialist',
+          },
+        ],
+      },
+      {
+        '@type': 'ProfessionalService',
+        '@id': 'https://apachespark.tech/#service',
+        name: 'Apache Spark Systems & Software Engineering',
+        url: 'https://apachespark.tech',
+        priceRange: '$$$$',
+        telephone: '+1 (555) 488-2890',
+        email: 'engage@apachespark.tech',
+        areaServed: 'Worldwide',
+        knowsAbout: [
+          'Next.js 15',
+          'React 19',
+          'TypeScript',
+          'Rust',
+          'Go',
+          'Distributed Systems',
+          'Supabase Postgres',
+          'SCADA Industrial Ethernet',
+          'Optical Networking',
+          'Kubernetes',
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'Engineering Sprint Packages',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Architectural Draft Sprint',
+                description: 'Pre-procurement discovery, risk register & complete engineering schematics.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Full Turnkey Implementation',
+                description: 'End-to-end turnkey delivery from physical closet to deployment pipeline.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Retained Escalation Pod',
+                description: 'Ongoing architectural advisory & Tier-4 operational backing with 15-min SLA.',
+              },
+            },
+          ],
+        },
+      },
+    ],
   };
 
   return (

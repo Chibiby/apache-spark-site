@@ -33,12 +33,13 @@ export const BRAND_GEOMETRY = {
 
 export const BRAND_COPY = {
   h1Soft: 'We build the',
-  h1Ink: 'systems your business runs on.',
-  lede: 'Software, networks and infrastructure, drafted to spec and deployed end to end. One team from the wiring closet to the deployment pipeline.',
+  h1Ink: 'software and systems your business runs on.',
+  lede: 'Full-stack platforms, distributed cloud architecture, and mission-critical infrastructure, drafted to spec and deployed end to end. Direct principal engineering—no account managers, zero sales fluff.',
   contactEmail: 'engage@apachespark.tech',
-  phone:'+1 (555) 488-2890',
+  phone: '+1 (555) 488-2890',
   location: 'San Francisco / Chicago',
   siteName: 'APACHE SPARK',
   siteUrl: 'https://apachespark.tech',
-  descriptors: ['SOFTWARE', 'SYSTEMS', 'NETWORKS', 'INFRASTRUCTURE'],
+  descriptors: ['FULL-STACK PLATFORMS', 'DISTRIBUTED SYSTEMS', 'CLOUD ARCHITECTURE', 'MISSION-CRITICAL INFRASTRUCTURE'],
 } as const;
+
