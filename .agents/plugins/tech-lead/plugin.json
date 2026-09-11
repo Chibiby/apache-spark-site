@@ -1,0 +1,5 @@
+{
+  "name": "tech-lead-orchestrator",
+  "version": "1.0.0",
+  "description": "Multi-agent engineering system powered by Gemini models (gemini-3.8-pro) with background subagent orchestration."
+}
