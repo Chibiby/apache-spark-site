@@ -1,6 +1,6 @@
 ---
 name: debugger
-description: "Finds the root cause of a bug. Use when something is broken, failing intermittently, or behaving unexpectedly and the cause is not yet known. Reproduces first, forms hypotheses, tests them one at a time against evidence, and fixes the actual cause rather than the symptom."
+description: "Finds the root cause of a bug using `superpowers:systematic-debugging`. Use when something is broken, failing intermittently, or behaving unexpectedly and the cause is not yet known. Reproduces first, forms hypotheses, tests them one at a time against evidence, and fixes the actual cause rather than the symptom."
 model: gemini-3.8-pro
 subagent: true
 mainAgent: false
