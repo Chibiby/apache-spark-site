@@ -92,16 +92,15 @@ export const Team: React.FC = () => {
                   : 'bg-[#F2EFE8]'
               }`}
             >
-              {/* Dynamic Interactive Mouse Hover Background Spotlight */}
+              {/* Dynamic Interactive Mouse Hover Background Spotlight (Clean Visible Light Glow) */}
               <div
-                className="absolute inset-0 pointer-events-none transition-opacity duration-200 z-0"
+                className="absolute inset-0 pointer-events-none transition-opacity duration-150 z-0"
                 style={{
                   opacity: hoveredIdx === i ? 1 : 0,
-                  background: isHiring
-                    ? `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, rgba(158, 84, 48, 0.24) 0%, rgba(158, 84, 48, 0.08) 45%, transparent 75%)`
-                    : `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, rgba(158, 84, 48, 0.18) 0%, rgba(20, 24, 28, 0.05) 50%, transparent 80%)`,
+                  background: `radial-gradient(320px circle at ${currentPos.x}px ${currentPos.y}px, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 35%, rgba(255, 255, 255, 0.2) 65%, transparent 80%)`,
                 }}
               />
+
 
               {/* Top row */}
               <div className="relative z-10 flex items-center justify-between pb-4 border-b border-[rgba(20,24,28,0.10)] font-mono text-[10px] tracking-[0.2em]">
@@ -189,7 +188,7 @@ export const Team: React.FC = () => {
             </span>
           </div>
           <p className="font-sans text-[16px] md:text-[18px] font-bold text-[#14181C]">
-            Building with Brandanlee Hugos &amp; Dante Nicholas.
+            Building with Brandanlee Hugos &amp; Dante Nicolas.
           </p>
           <p className="font-mono text-[12px] text-[#7C7568] max-w-2xl">
             Stations 03–06 are vacant. Any visitor, freelancer, or engineer can apply directly to our core engineering bench.

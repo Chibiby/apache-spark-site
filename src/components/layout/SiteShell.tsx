@@ -7,7 +7,6 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { CustomCursor } from '@/components/fx/CustomCursor';
-import { MouseSpotlightBackground } from '@/components/fx/MouseSpotlightBackground';
 import { SmoothScroll } from '@/components/fx/SmoothScroll';
 import { Preloader } from '@/components/brand/Preloader';
 
@@ -54,9 +53,6 @@ export const SiteShell: React.FC<SiteShellProps> = ({ children, modal }) => {
 
       {/* Drafting crosshair cursor */}
       <CustomCursor />
-
-      {/* Dynamic mouse-following background illumination & drafting guide */}
-      <MouseSpotlightBackground />
 
       {/* Lenis on GSAP Ticker */}
       <SmoothScroll>

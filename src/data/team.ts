@@ -13,7 +13,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     index: '02',
-    name: 'Dante Nicholas',
+    name: 'Dante Nicolas',
     role: 'Core Systems Engineer',
     devNumber: 'DEV 02',
     status: 'ACTIVE',

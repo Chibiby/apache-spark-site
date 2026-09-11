@@ -158,7 +158,7 @@ export const ApplyDevModal: React.FC<ApplyDevModalProps> = ({
                       Apply as Developer
                     </h3>
                     <p className="font-mono text-[12px] text-[#7C7568] leading-relaxed mt-1">
-                      Submit your credentials to join Brandanlee Hugos (Dev 1) and Dante Nicholas (Dev 2). We welcome all visitors and practicing engineers.
+                      Submit your credentials to join Brandanlee Hugos (Dev 1) and Dante Nicolas (Dev 2). We welcome all visitors and practicing engineers.
                     </p>
                   </div>
 
@@ -313,7 +313,7 @@ export const ApplyDevModal: React.FC<ApplyDevModalProps> = ({
                     </p>
                     <p className="text-[#7C7568] leading-relaxed">
                       Our Lead Systems Developer <strong>Brandanlee Hugos (Dev 1)</strong> and Core Systems Engineer{' '}
-                      <strong>Dante Nicholas (Dev 2)</strong> personally review each candidate profile. A dispatch confirmation has been scheduled for <strong>{email}</strong>.
+                      <strong>Dante Nicolas (Dev 2)</strong> personally review each candidate profile. A dispatch confirmation has been scheduled for <strong>{email}</strong>.
                     </p>
                   </div>
 
