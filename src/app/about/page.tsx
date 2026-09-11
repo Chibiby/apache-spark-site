@@ -86,21 +86,56 @@ export default function AboutPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-[rgba(20,24,28,0.16)] border border-[rgba(20,24,28,0.16)]">
           {TEAM_MEMBERS.map((m) => (
-            <div key={m.name} className="bg-[#F2EFE8] p-8 flex flex-col justify-between min-h-[240px]">
+            <div
+              key={m.index}
+              className={`p-8 flex flex-col justify-between min-h-[240px] ${
+                m.isHiring ? 'bg-[#EFECE5]' : 'bg-[#F2EFE8]'
+              }`}
+            >
               <div className="flex items-center justify-between pb-3 border-b border-[rgba(20,24,28,0.10)] font-mono text-[10px]">
-                <span className="text-[#9E5430] font-semibold">{m.index}</span>
-                <span className="text-[#7C7568]">{m.role}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#9E5430] font-semibold">{m.index}</span>
+                  {m.devNumber && (
+                    <span className="bg-[#14181C] text-[#F2EFE8] px-1.5 py-0.5 text-[9px] tracking-[0.14em] font-medium">
+                      {m.devNumber}
+                    </span>
+                  )}
+                </div>
+                {m.isHiring ? (
+                  <span className="text-[#9E5430] font-semibold tracking-[0.14em] bg-[#9E5430]/10 px-2 py-0.5 border border-[#9E5430]/30">
+                    {m.hiringLabel || 'HIRING'}
+                  </span>
+                ) : (
+                  <span className="text-[#7C7568]">STATION {m.index}</span>
+                )}
               </div>
               <div className="py-4">
-                <h3 className="font-sans text-[20px] font-bold text-[#14181C]">
+                <h3
+                  className={`font-sans text-[20px] font-bold ${
+                    m.isHiring ? 'text-[#7C7568]' : 'text-[#14181C]'
+                  }`}
+                >
                   {m.name}
                 </h3>
-                <p className="font-mono text-[11px] text-[#7C7568] mt-1">
+                <span className="font-mono text-[11px] text-[#9E5430] tracking-[0.14em] uppercase block mt-0.5">
+                  {m.role}
+                </span>
+                <p className="font-mono text-[11px] text-[#7C7568] mt-1.5">
                   {m.specialization}
                 </p>
               </div>
-              <div className="pt-3 border-t border-[rgba(20,24,28,0.08)] font-mono text-[10px] text-[#14181C]">
-                {m.credential}
+              <div className="pt-3 border-t border-[rgba(20,24,28,0.08)] font-mono text-[10px] flex items-center justify-between">
+                <span className={m.isHiring ? 'text-[#9E5430]' : 'text-[#14181C]'}>
+                  {m.credential}
+                </span>
+                {m.isHiring && (
+                  <Link
+                    href="/#team"
+                    className="text-[#14181C] hover:text-[#9E5430] font-semibold underline underline-offset-2"
+                  >
+                    APPLY →
+                  </Link>
+                )}
               </div>
             </div>
           ))}

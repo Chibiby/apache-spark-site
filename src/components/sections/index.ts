@@ -11,5 +11,6 @@ export * from './LiveShowcase';
 export * from './Testimonials';
 export * from './Engagements';
 export * from './Team';
+export * from './ApplyDevModal';
 export * from './FAQ';
 export * from './CTASheet';

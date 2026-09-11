@@ -88,6 +88,10 @@ export interface TeamMember {
   specialization: string;
   credential: string;
   index: string;
+  isHiring?: boolean;
+  hiringLabel?: string;
+  devNumber?: string;
+  status?: 'ACTIVE' | 'HIRING';
 }
 
 export interface FAQItem {
