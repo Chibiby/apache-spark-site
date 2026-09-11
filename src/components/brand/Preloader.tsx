@@ -283,7 +283,7 @@ export const Preloader: React.FC = () => {
       window.removeEventListener('keydown', skip);
       document.documentElement.style.overflow = originalOverflow;
     };
-  }, []);
+  }, [pathname]);
 
   if (!active || pathname?.startsWith('/embed')) return null;
 

@@ -56,7 +56,7 @@ export const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [prefersReduced]);
+  }, [prefersReduced, isEmbed]);
 
   return <>{children}</>;
 };
