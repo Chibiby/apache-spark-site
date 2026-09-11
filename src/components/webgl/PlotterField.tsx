@@ -51,7 +51,7 @@ export const PlotterField: React.FC<PlotterFieldProps> = ({
         rands.push(((i * 73) % 100) / 100);
       }
 
-      // Generate connecting segments between nearest neighbours (under threshold)
+      // Generate connecting segments between nearest neighbours with balanced airiness
       const lines: number[] = [];
       const lRands: number[] = [];
 
@@ -62,7 +62,7 @@ export const PlotterField: React.FC<PlotterFieldProps> = ({
           const dy = nodes[i][1] - nodes[j][1];
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 0.38 && connections < 3) {
+          if (dist < 0.32 && connections < 2) {
             lines.push(
               nodes[i][0], nodes[i][1], nodes[i][2],
               nodes[j][0], nodes[j][1], nodes[j][2]

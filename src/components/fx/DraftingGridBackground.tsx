@@ -79,37 +79,19 @@ export const DraftingGridBackground: React.FC = () => {
       const cols = Math.ceil(width / GRID_SIZE) + 1;
       const rows = Math.ceil(height / GRID_SIZE) + 1;
 
-      // Calculate grid points with magnetic pull distortion around cursor
+      // Stable drafting grid points (no jarring magnetic distortion)
       const points: { x: number; y: number }[][] = [];
-      const INFLUENCE_RADIUS = 280;
 
       for (let r = 0; r <= rows; r++) {
         points[r] = [];
         for (let c = 0; c <= cols; c++) {
-          const originalX = c * GRID_SIZE;
-          const originalY = r * GRID_SIZE;
-
-          const dx = originalX - mouseX;
-          const dy = originalY - mouseY;
-          const dist = Math.hypot(dx, dy);
-
-          let displacedX = originalX;
-          let displacedY = originalY;
-
-          if (dist < INFLUENCE_RADIUS && dist > 0) {
-            // Subtle elastic magnetic pull toward mouse
-            const force = Math.pow(1 - dist / INFLUENCE_RADIUS, 2) * 12;
-            displacedX -= (dx / dist) * force;
-            displacedY -= (dy / dist) * force;
-          }
-
-          points[r][c] = { x: displacedX, y: displacedY };
+          points[r][c] = { x: c * GRID_SIZE, y: r * GRID_SIZE };
         }
       }
 
       // 1. Draw horizontal grid lines
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(20, 24, 28, 0.06)';
+      ctx.strokeStyle = 'rgba(20, 24, 28, 0.04)';
       ctx.lineWidth = 1;
 
       for (let r = 0; r <= rows; r++) {
@@ -126,7 +108,7 @@ export const DraftingGridBackground: React.FC = () => {
 
       // 2. Draw vertical grid lines
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(20, 24, 28, 0.06)';
+      ctx.strokeStyle = 'rgba(20, 24, 28, 0.04)';
       ctx.lineWidth = 1;
 
       for (let c = 0; c <= cols; c++) {
@@ -141,147 +123,38 @@ export const DraftingGridBackground: React.FC = () => {
       }
       ctx.stroke();
 
-      // 3. Technical Grid Crosshairs (+) at points near cursor
-      for (let r = 0; r <= rows; r++) {
-        for (let c = 0; c <= cols; c++) {
-          const p = points[r][c];
-          if (!p) continue;
-          const dist = Math.hypot(p.x - mouseX, p.y - mouseY);
+      // 3. Minimal Precision Cursor Reticle (unobtrusive, compact, subtle)
+      if (isHovering && alphaActivity > 0.05) {
+        const reticleRadius = 16;
+        const tickLength = 3;
 
-          if (dist < 220) {
-            const intensity = (1 - dist / 220) * alphaActivity;
-            ctx.strokeStyle = `rgba(158, 84, 48, ${0.4 * intensity})`;
-            ctx.lineWidth = 1;
+        ctx.save();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = `rgba(158, 84, 48, ${0.25 * alphaActivity})`;
 
-            const arm = 4;
-            ctx.beginPath();
-            ctx.moveTo(p.x - arm, p.y);
-            ctx.lineTo(p.x + arm, p.y);
-            ctx.moveTo(p.x, p.y - arm);
-            ctx.lineTo(p.x, p.y + arm);
-            ctx.stroke();
+        // Delicate compact precision ring
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, reticleRadius, 0, Math.PI * 2);
+        ctx.stroke();
 
-            // Connect nearby nodes to mouse with whisper line
-            if (dist < 140) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(158, 84, 48, ${0.12 * (1 - dist / 140) * alphaActivity})`;
-              ctx.moveTo(p.x, p.y);
-              ctx.lineTo(mouseX, mouseY);
-              ctx.stroke();
-            }
-          }
-        }
+        // 4 subtle cardinal ticks (top, bottom, left, right)
+        ctx.beginPath();
+        // Top
+        ctx.moveTo(mouseX, mouseY - reticleRadius);
+        ctx.lineTo(mouseX, mouseY - reticleRadius - tickLength);
+        // Bottom
+        ctx.moveTo(mouseX, mouseY + reticleRadius);
+        ctx.lineTo(mouseX, mouseY + reticleRadius + tickLength);
+        // Left
+        ctx.moveTo(mouseX - reticleRadius, mouseY);
+        ctx.lineTo(mouseX - reticleRadius - tickLength, mouseY);
+        // Right
+        ctx.moveTo(mouseX + reticleRadius, mouseY);
+        ctx.lineTo(mouseX + reticleRadius + tickLength, mouseY);
+        ctx.stroke();
+
+        ctx.restore();
       }
-
-      // 4. Architectural Caliper Guides passing through cursor
-      ctx.lineWidth = 1;
-
-      // Horizontal guide line
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(158, 84, 48, ${0.18 * alphaActivity})`;
-      ctx.moveTo(0, mouseY);
-      ctx.lineTo(width, mouseY);
-      ctx.stroke();
-
-      // Vertical guide line
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(158, 84, 48, ${0.18 * alphaActivity})`;
-      ctx.moveTo(mouseX, 0);
-      ctx.lineTo(mouseX, height);
-      ctx.stroke();
-
-      // Millimeter ruler graduation ticks along axis within 240px of cursor
-      ctx.strokeStyle = `rgba(20, 24, 28, ${0.25 * alphaActivity})`;
-      ctx.fillStyle = `rgba(124, 117, 104, ${0.7 * alphaActivity})`;
-      ctx.font = '8px ui-monospace, SFMono-Regular, Menlo, monospace';
-
-      for (let offset = -240; offset <= 240; offset += 16) {
-        if (offset === 0) continue;
-
-        const isMajor = offset % 64 === 0;
-        const tickLength = isMajor ? 6 : 3;
-
-        // Ticks on horizontal axis
-        const tickX = mouseX + offset;
-        if (tickX > 0 && tickX < width) {
-          ctx.beginPath();
-          ctx.moveTo(tickX, mouseY - tickLength);
-          ctx.lineTo(tickX, mouseY + tickLength);
-          ctx.stroke();
-
-          if (isMajor) {
-            ctx.fillText(`${offset > 0 ? '+' : ''}${offset}`, tickX - 10, mouseY - 9);
-          }
-        }
-
-        // Ticks on vertical axis
-        const tickY = mouseY + offset;
-        if (tickY > 0 && tickY < height) {
-          ctx.beginPath();
-          ctx.moveTo(mouseX - tickLength, tickY);
-          ctx.lineTo(mouseX + tickLength, tickY);
-          ctx.stroke();
-
-          if (isMajor) {
-            ctx.fillText(`${offset > 0 ? '+' : ''}${offset}`, mouseX + 9, tickY + 3);
-          }
-        }
-      }
-
-      // 5. Compass Drafting Arcs & Dimension Circles
-      ctx.save();
-      ctx.setLineDash([4, 6]);
-
-      // Inner compass circle
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(158, 84, 48, ${0.22 * alphaActivity})`;
-      ctx.arc(mouseX, mouseY, 96, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // Outer compass circle
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(20, 24, 28, ${0.12 * alphaActivity})`;
-      ctx.arc(mouseX, mouseY, 192, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.restore();
-
-      // Drafting angle rays (45° and 135°)
-      const rayLen = 70;
-      const rad45 = Math.PI / 4;
-      const rad135 = (3 * Math.PI) / 4;
-
-      ctx.save();
-      ctx.setLineDash([2, 4]);
-      ctx.strokeStyle = `rgba(158, 84, 48, ${0.16 * alphaActivity})`;
-
-      ctx.beginPath();
-      ctx.moveTo(mouseX, mouseY);
-      ctx.lineTo(mouseX + Math.cos(rad45) * rayLen, mouseY + Math.sin(rad45) * rayLen);
-      ctx.moveTo(mouseX, mouseY);
-      ctx.lineTo(mouseX + Math.cos(rad135) * rayLen, mouseY + Math.sin(rad135) * rayLen);
-      ctx.moveTo(mouseX, mouseY);
-      ctx.lineTo(mouseX + Math.cos(-rad45) * rayLen, mouseY + Math.sin(-rad45) * rayLen);
-      ctx.moveTo(mouseX, mouseY);
-      ctx.lineTo(mouseX + Math.cos(-rad135) * rayLen, mouseY + Math.sin(-rad135) * rayLen);
-      ctx.stroke();
-      ctx.restore();
-
-      // Dimension labels
-      ctx.fillStyle = `rgba(158, 84, 48, ${0.65 * alphaActivity})`;
-      ctx.fillText('R:96MM', mouseX + 70, mouseY - 70);
-      ctx.fillStyle = `rgba(124, 117, 104, ${0.5 * alphaActivity})`;
-      ctx.fillText('R:192MM', mouseX + 138, mouseY - 138);
-
-      // 6. Real-time Coordinate Telemetry Block
-      const telemX = mouseX + 18;
-      const telemY = mouseY + 24;
-
-      ctx.fillStyle = `rgba(20, 24, 28, ${0.7 * alphaActivity})`;
-      ctx.fillText(`X:${Math.round(mouseX)} Y:${Math.round(mouseY)}`, telemX, telemY);
-
-      ctx.fillStyle = `rgba(158, 84, 48, ${0.75 * alphaActivity})`;
-      ctx.fillText(`DRAFT // 64MM`, telemX, telemY + 11);
 
       animFrameId = requestAnimationFrame(render);
     };

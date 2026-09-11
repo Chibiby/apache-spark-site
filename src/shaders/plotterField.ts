@@ -28,12 +28,12 @@ void main() {
   ) * 0.035;
   pos.xy += curl;
   
-  // Mouse nudge within radius
+  // Gentle mouse deflection within radius
   vec2 mouseDist = pos.xy - uMouse;
   mouseDist.x *= uAspect;
   float d = length(mouseDist);
-  if (d < 0.35) {
-    float push = (1.0 - d / 0.35) * 0.06;
+  if (d < 0.25) {
+    float push = (1.0 - d / 0.25) * 0.02;
     pos.xy += normalize(mouseDist) * push;
   }
   
@@ -41,7 +41,7 @@ void main() {
   vIsAccent = step(0.92, aRandom); // Accent on under 10% of nodes/edges
   
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-  gl_PointSize = vIsAccent > 0.5 ? 5.0 : 3.5;
+  gl_PointSize = vIsAccent > 0.5 ? 2.4 : 1.8;
 }
 `;
 
@@ -60,7 +60,9 @@ void main() {
     ? (uInverted ? ACCENT_LT : ACCENT)
     : (uInverted ? PAPER : INK);
     
-  gl_FragColor = vec4(color, vAlpha * 0.85);
+  // Faded node opacity so text remains clear
+  float nodeAlpha = vIsAccent > 0.5 ? 0.24 : 0.12;
+  gl_FragColor = vec4(color, vAlpha * nodeAlpha);
 }
 `;
 
@@ -88,11 +90,12 @@ void main() {
   ) * 0.035;
   pos.xy += curl;
   
+  // Gentle mouse deflection within radius
   vec2 mouseDist = pos.xy - uMouse;
   mouseDist.x *= uAspect;
   float d = length(mouseDist);
-  if (d < 0.35) {
-    float push = (1.0 - d / 0.35) * 0.06;
+  if (d < 0.25) {
+    float push = (1.0 - d / 0.25) * 0.02;
     pos.xy += normalize(mouseDist) * push;
   }
   
@@ -117,7 +120,8 @@ void main() {
     ? (uInverted ? ACCENT_LT : ACCENT)
     : (uInverted ? PAPER : INK);
     
-  float lineAlpha = vIsAccent > 0.5 ? 0.75 : 0.28;
+  // Faded architectural watermark line alpha (faded, unobtrusive)
+  float lineAlpha = vIsAccent > 0.5 ? 0.16 : 0.065;
   gl_FragColor = vec4(color, vAlpha * lineAlpha);
 }
 `;

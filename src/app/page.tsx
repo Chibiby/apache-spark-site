@@ -25,7 +25,7 @@ export default function HomePage() {
       <SceneCanvasWrapper />
 
       {/* Subtle 72px drafting background grid */}
-      <ConstructionGrid opacity={0.35} />
+      <ConstructionGrid opacity={0.18} />
 
       {/* Vernier Caliper & Scroll Vector HUD */}
       <ScrollHUD />
